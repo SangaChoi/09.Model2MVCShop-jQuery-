@@ -65,11 +65,12 @@ public class ProductController {
 	//public String addUser( @ModelAttribute("product") Product product) throws Exception {
 	@RequestMapping(value="addProduct", method=RequestMethod.POST)
 	public String addProduct(@ModelAttribute("product")Product product, HttpServletRequest request) throws Exception{
-		System.out.println("/addProduct.do");
+		
+		System.out.println("/addProduct");
 		
 		
 		if(FileUpload.isMultipartContent(request)) {
-			String temDir="C:\\Users\\Bit\\git\\Model2MVCShop\\03.Model2MVCShop(EL,JSTL)\\WebContent\\images\\uploadFiles";
+			String temDir="C:\\Users\\Bit\\git\\09.Model2MVCShop(jQuery)\\09.Model2MVCShop(jQuery)\\WebContent\\images\\uploadFiles";
 			
 			DiskFileUpload fileUpload=new DiskFileUpload();
 			fileUpload.setRepositoryPath(temDir);
@@ -78,7 +79,7 @@ public class ProductController {
 			fileUpload.setSizeThreshold(1024*100);
 			
 			if(request.getContentLength()<fileUpload.getSizeMax()) {
-				product=new Product();
+				//Product product=new Product();
 				
 				StringTokenizer token=null;
 				
@@ -127,20 +128,26 @@ public class ProductController {
 		}else {
 			System.out.println("인코딩 타입이 multipart/form-data가 아닙니다.");
 		}
-			
+
 		return "forward:/product/addProduct.jsp";
 	}
 	
 	//@RequestMapping("/listProduct.do")
 	//public String listProduct(@ModelAttribute("search") Search search,Model model , HttpServletRequest request) throws Exception{
 	@RequestMapping(value="listProduct")
-	public String listProduct(@ModelAttribute("search") Search search,Model model , HttpServletRequest request) throws Exception{
-		System.out.println("/listProduct.do");
+	public String listProduct(@ModelAttribute("search") Search search, Model model , HttpServletRequest request) throws Exception{
+		
+		System.out.println("/listProduct");
 		
 		if(search.getCurrentPage() ==0 ){
 			search.setCurrentPage(1);
 		}
 		search.setPageSize(pageSize);
+			
+		if(search.getSearchCondition()==null && search.getSearchKeyword()==null) {
+			search.setSearchCondition("0");
+			search.setSearchKeyword("");
+		}
 		
 		Map<String , Object> map=productService.getProductList(search);
 		
@@ -158,7 +165,7 @@ public class ProductController {
 	//public String updateProductView(@RequestParam("prodNo") int prodNo, Model model) throws Exception{
 	@RequestMapping(value="updateProduct", method=RequestMethod.GET)
 	public String updateProduct(@RequestParam("prodNo") int prodNo, Model model) throws Exception{
-		System.out.println("/updateProductView.do");
+		System.out.println("/updateProductView");
 		
 		Product product=productService.getProduct(prodNo);
 		model.addAttribute("product",product);
@@ -169,9 +176,9 @@ public class ProductController {
 	//@RequestMapping("/updateProduct.do")
 	//public String updateProduct(@ModelAttribute("product")Product product, Model model , HttpSession session) throws Exception{
 	@RequestMapping(value="updateProduct", method=RequestMethod.POST)
-	public String updateProduct(@ModelAttribute("product")Product product, Model model , HttpSession session) throws Exception{
-		System.out.println("/updateProduct.do");
-		
+	public String updateProduct(@ModelAttribute("product")Product product, Model model , HttpSession session, HttpServletRequest request) throws Exception{
+		System.out.println("/updateProduct");
+				
 		productService.updateProduct(product);
 		
 		int prodNo=product.getProdNo();

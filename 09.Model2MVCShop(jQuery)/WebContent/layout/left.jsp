@@ -47,6 +47,25 @@
 		 	$( ".Depth03:contains('판매상품등록')" ).bind("click" , function() {
 		 		$(window.parent.frames["rightFrame"].document.location).attr("href","/product/addProduct");
 		 	});
+		 	
+		 	
+		 	$( ".Depth03:contains('판매상품관리')" ).bind("click" , function() {
+		 		$(window.parent.frames["rightFrame"].document.location).attr("href","/product/listProduct?menu=manage");
+		 	});
+		 	
+		 	
+		 	$( ".Depth03:contains('상품검색')" ).bind("click" , function() {
+		 		$(window.parent.frames["rightFrame"].document.location).attr("href","/product/listProduct?menu=search");
+		 	});
+		 	
+		 	$( ".Depth03:contains('구매이력조회')" ).bind("click" , function() {
+		 		$(window.parent.frames["rightFrame"].document.location).attr("href","/purchase/listPurchase?buyerId=${user.userId}");
+		 	});
+		 	
+		 	$( ".Depth03:contains('최근 본 상품')" ).bind("click" , function() {
+		 		history();
+		 	});
+		 	
 		});	
 		 
 	</script>
@@ -98,13 +117,14 @@
 			<table  border="0" cellspacing="0" cellpadding="0" width="159">
 				<tr>
 					<td class="Depth03">
-						<!-- a href="../product/addProductView.jsp;" target="rightFrame">판매상품등록</a>-->
+						<!-- <a href="../product/addProductView.jsp;" target="rightFrame">판매상품등록</a>-->
 						판매상품등록
 					</td>
 				</tr>
 				<tr>
 					<td class="Depth03">
-						<a href="/listProduct.do?menu=manage"  target="rightFrame">판매상품관리</a>
+						<!-- <a href="/listProduct.do?menu=manage"  target="rightFrame">판매상품관리</a>-->
+						판매상품관리
 					</td>
 				</tr>
 				<tr>
@@ -121,14 +141,16 @@
 		<table  border="0" cellspacing="0" cellpadding="0" width="159">
 			<tr>
 				<td class="Depth03">
-					<a href="/listProduct.do?menu=search" target="rightFrame">상 품 검 색</a>
+					<!--<a href="/listProduct.do?menu=search" target="rightFrame">상 품 검 색</a>-->
+					상품검색
 				</td>
 			</tr>
 			
 			<c:if test="${ !empty user && user.role == 'user'}">
 			<tr>
 				<td class="Depth03">
-					<a href="/listPurchase.do?buyerId=${user.userId}"  target="rightFrame">구매이력조회</a>
+					<!--<a href="/listPurchase.do?buyerId=${user.userId}"  target="rightFrame">구매이력조회</a>-->
+					구매이력조회
 				</td>
 			</tr>
 			</c:if>
@@ -137,7 +159,10 @@
 				<td class="DepthEnd">&nbsp;</td>
 			</tr>
 			<tr>
-				<td class="Depth03"><a href="javascript:history()">최근 본 상품</a></td>
+				<td class="Depth03">
+				<!--<a href="javascript:history()">최근 본 상품</a>-->
+				최근 본 상품
+				</td>
 			</tr>
 		</table>
 	</td>

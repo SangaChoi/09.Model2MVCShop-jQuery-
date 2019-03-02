@@ -43,13 +43,13 @@
 }
 */
 
-$(function() {
-	$("td.ct_btn01:contains('등록')").bind("click",function(){
+	function fncAddProduct(){
 	
-		var name=$("input[name='prodName']").val;
-		var detail=$("input[name='prodDetail']").val;
-		var manuDate=$("input[name='manuDate']").val;
-		var price=$("input[name='price']").val;
+	
+		var name=$("input[name='prodName']").val();
+		var detail=$("input[name='prodDetail']").val();
+		var manuDate=$("input[name='manuDate']").val();
+		var price=$("input[name='price']").val();
 		
 		if(name == null || name.length<1){
 			alert("상품명은 반드시 입력하여야 합니다.");
@@ -69,15 +69,16 @@ $(function() {
 		}
 		
 		$("form").attr("method" , "POST").attr("action" , "/product/addProduct").attr("enctype","multipart/form-data").submit();
-	});
+		//$("form").attr("method" , "POST").attr("action" , "/product/addProduct").submit();
+	
+	}
+
+
+$(function() {
+	$("td.ct_btn01:contains('등록')").bind("click",function(){
+		fncAddProduct();
+	})
 });
-
-
-/*
-function resetData(){
-	document.detailForm.reset();
-}
-*/
 
 $(function() {
 	$("td.ct_btn01:contains('취소')").bind("click",function(){
@@ -91,7 +92,7 @@ $(function() {
 
 <body bgcolor="#ffffff" text="#000000">
 
-<form name="detailForm" method="post">
+<form name="detailForm">
 
 <table width="100%" height="37" border="0" cellpadding="0"	cellspacing="0">
 	<tr>

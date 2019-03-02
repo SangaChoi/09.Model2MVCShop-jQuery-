@@ -58,6 +58,7 @@ public class Search {
 		return (getCurrentPage()-1)*getPageSize()+1;
 	}
 
+
 	@Override
 	public String toString() {
 		return "Search [currentPage=" + currentPage + ", searchCondition="
